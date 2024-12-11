@@ -39,7 +39,7 @@ The `LinkedList` class supports the following operations:
 
 2. Compile the project using a C++ compiler (e.g., `g++`):
    ```bash
-    g++ -o ./lab1 Node.h Node.cpp LinkedList.h LinkedList.cpp main.cpp 
+    g++ -o ./linkedlist Node.h Node.cpp LinkedList.h LinkedList.cpp main.cpp 
    ```
 
 3. Run the executable:
