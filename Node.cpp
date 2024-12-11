@@ -17,7 +17,7 @@ Node<T>::Node (const Node<T>& other){
 
 template<class T>
 Node<T>::~Node(){
-    cout << "Destructor" << endl;
+    cout << "Destructor    " << data << endl;
 }
 
 // setters : 

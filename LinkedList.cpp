@@ -6,9 +6,7 @@
 
 
 template <class T>
-LinkedList<T>  ::   LinkedList(){ // Empty Constructor
-    head = tail = NULL ;
-    count = 0 ;
+LinkedList<T>  ::   LinkedList(): head(NULL) , tail(NULL) , count(0){ // Empty Constructor
 } 
 
 template <class T>
@@ -177,18 +175,27 @@ int LinkedList<T>::getCount () const {
 // opertators :
 
 template <class T>
-void LinkedList<T>::operator + (const LinkedList<T>& other){
-   Node<T>* ptr = other.head ;
-   while(ptr != NULL){
-    this->insert(ptr->data);
-    ptr = ptr->next ;
-   }
+LinkedList<T>& LinkedList<T>::operator + (const LinkedList<T>& other){
+    LinkedList<T>* newLinkedList = new LinkedList<T>();
+    Node<T>* currentNode = this->head ; 
+
+    while(currentNode != NULL){
+        newLinkedList->insert(currentNode->data);
+        currentNode= currentNode->next ;
+    }
+    currentNode = other.head ;
+    while(currentNode != NULL){
+        newLinkedList->insert(currentNode->data);
+        currentNode= currentNode->next ;
+    }
+    newLinkedList->display();
+   return *newLinkedList ;
 }
 
 
 template <class T>
 T LinkedList<T>::operator [] (const int& index){
-    if (index > -1 && index < count){
+    if (index > -1 && index <= count){
         Node<T>* currentNode = head ;
         int counter = 0 ;
         while ( currentNode != NULL){
@@ -196,17 +203,19 @@ T LinkedList<T>::operator [] (const int& index){
                 return currentNode->data ;
             }
             currentNode = currentNode->next ;
+            counter ++ ;
         }
+        
 
     } 
 }
 
-
 template <class T>
-LinkedList<T> LinkedList<T>:: operator = (const LinkedList<T>& other){
+LinkedList<T> & LinkedList<T> :: operator = (const LinkedList<T>&other){
+    cout << "inside the = operator " << endl;
     Node<T>* currentNode = head ;
-    Node<T>* temp;
-    if (this->head != NULL){
+    Node<T>* temp ;
+    if (currentNode != NULL){
         while(currentNode != NULL){
             temp = currentNode->next ;
             delete currentNode ;
@@ -215,14 +224,17 @@ LinkedList<T> LinkedList<T>:: operator = (const LinkedList<T>& other){
         count = 0 ;
         tail = head = NULL ;
     }
-
-    temp = other.head ; 
-    while (temp != NULL){
-        this->insert(temp->data);
-        temp= temp->next ;
+    currentNode = temp = NULL ; 
+    currentNode = other.head;
+    while (currentNode != NULL){
+        this->insert(currentNode->data);
+        currentNode = currentNode->next ;
     }
+    this->display();
     return *this ;
 }
+
+
         
 template <class T> 
 void LinkedList<T> :: display ()const {

@@ -27,9 +27,9 @@ class LinkedList{
         void display () const ;
         
         // opertators :
-        void operator + (const LinkedList<T>&);
+        LinkedList<T>& operator + (const LinkedList<T>&);
         T operator [] (const int&);
-        LinkedList<T> operator = (const LinkedList<T>&);        
+        LinkedList<T>& operator = (const LinkedList<T>&);        
         
 };
 
